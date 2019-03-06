@@ -10,7 +10,7 @@ def create_app():
 
     #  after creatin models.py  run the follow
     #  configure the app object 
-    app.config['SQLALCHEMY_DATABASE_URI'] = config('DATABASE_URL')  # get db location from .env
+    app.config['SQLALCHEMY_DATABASE_URI'] = config('DATABASE_URL')  # get db loc from .env
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['FLASK_ENV'] = config('ENV')
     DB.init_app(app)
@@ -29,6 +29,7 @@ def create_app():
 
     return app
 
-#  to run from terminal : set FLASK_APP=TweetR:APP
-#                   +     flask run -h 0.0.0.0 -p 8000
+#  to run from terminal : set FLASK_APP=TWpred:APP
+#                   +     flask run   OR    flask shell
+
  

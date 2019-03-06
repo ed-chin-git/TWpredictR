@@ -1,4 +1,4 @@
-from tweetr.twitter import *
+from TWpred.twitter import *
 DB.drop_all()
 DB.create_all()
 #   Get TW user info 
