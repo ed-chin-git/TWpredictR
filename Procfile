@@ -1,0 +1,1 @@
+web: gunicorn twpredictr -t 120
