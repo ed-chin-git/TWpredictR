@@ -1,1 +1,1 @@
-web: gunicorn TWpred -t 120
+web: gunicorn TWpred:APP -t 120
