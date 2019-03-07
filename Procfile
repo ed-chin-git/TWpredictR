@@ -1,1 +1,1 @@
-web: gunicorn twpredictr -t 120
+web: gunicorn TWpred -t 120
