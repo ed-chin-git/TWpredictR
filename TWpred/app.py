@@ -7,8 +7,8 @@ from .predicted import predict_user
 import re
 import sys
 import pandas as pd
-from google.cloud import bigquery
 from textblob import TextBlob
+from google.cloud import bigquery
 
 def create_app():
     """ create + config Flask app obj """
