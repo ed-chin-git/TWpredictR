@@ -85,12 +85,12 @@ def get_sentiment(text):
 
 
 def textblob_sentiment(author):
-    #  authenticate with google
-    # LOCAL
-    jsonPath = "google-cred.json"
-    client = bigquery.Client.from_service_account_json(jsonPath)
-    #  heroku  ->  uses config vars in dashboard
-    # client = bigquery.Client()
+    # LOCAL authenticate with google
+    # jsonPath = "google-cred.json"
+    # client = bigquery.Client.from_service_account_json(jsonPath)
+    
+    # HEROKU  authenticate with google ->  uses config vars in dashboard
+    client = bigquery.Client()
     
     # Construct SQL query
     # Using WHERE reduces the amount of data scanned / quota used
@@ -132,4 +132,5 @@ def textblob_sentiment(author):
     # may have to output as stdout for node.js integration
     # print (output1JSON, output2JSON)
     # sys.stdout.flush()
-    return (output1JSON, output2JSON)
+
+    return (output1JSON + output2JSON)
