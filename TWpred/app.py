@@ -1,10 +1,14 @@
 """ Main application and routing logic for TweetR """
 from flask import Flask, request, render_template
-from .models import DB, User, Tweet
+#from .models import DB, User, Tweet
 from decouple import config
-from .functions import adduser, add_or_update_user
+#from .functions import adduser, add_or_update_user
 from .predicted import predict_user
-
+import re
+import sys
+import pandas as pd
+from google.cloud import bigquery
+from textblob import TextBlob
 
 def create_app():
     """ create + config Flask app obj """
@@ -19,15 +23,8 @@ def create_app():
 
     @app.route('/')
     def root():
-        users = User.query.all()
-        tweets = Tweet.query.all()
-        return render_template('base.html', title='Home', users=users, tweets=tweets )
-    
-    @app.route('/testload')
-    def testload():
-        adduser('NBCNews')
-        users = User.query.all()
-        tweets = Tweet.query.all()
+        users = []
+        tweets = []
         return render_template('base.html', title='Home', users=users, tweets=tweets )
 
     @app.route('/user', methods=['POST'])
@@ -45,23 +42,6 @@ def create_app():
             tweets = []
         return render_template('user.html', title=name, tweets=tweets,
                                message=message)
-
-    @app.route('/compare', methods=['POST'])
-    def compare():
-        user1, user2 = request.values['user1'], request.values['user2']
-        if user1 == user2:
-            return 'Cannot compare a user to themselves!'
-        else:
-            prediction = predict_user(user1, user2,
-                                      request.values['tweet_text'])
-            return user1 if prediction else user2
-
-
-    @app.route('/reload')
-    def reload():
-        DB.drop_all()
-        DB.create_all()
-        return render_template('base.html', title='DB has been RESET', users=[], tweets=[])
 
     return app
 
