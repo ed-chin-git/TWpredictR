@@ -1,6 +1,6 @@
 """ Main application and routing logic for TweetR """
 from flask import Flask, request, render_template
-#from .models import DB, User, Tweet
+from .models import DB, User, Tweet
 from decouple import config
 #from .functions import adduser, add_or_update_user
 from .predicted import predict_user
@@ -46,7 +46,8 @@ def create_app():
     return app
 
        
-#  to run from terminal : set FLASK_APP=TWpred:APP
+#  to run from terminal : cd to TWpred subfolder (where app.py resides)
+#                         set FLASK_APP=TWpred:APP
 #                   +     flask run   OR    flask shell
 
  
