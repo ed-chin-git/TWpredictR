@@ -8,6 +8,6 @@ scikit-learn
 gunicorn 
 psycopg2
 numpy
-google-cloud-biqquery
+google-cloud
 textblob
 pandas
