@@ -2,7 +2,7 @@
 from flask import Flask, request, render_template
 from .models import DB, User, Tweet
 from decouple import config
-from .functions import adduser, add_or_update_user
+from .functions import textblob_sentiment
 from .predicted import predict_user
 import re
 import sys
@@ -21,27 +21,18 @@ def create_app():
 
     DB.init_app(app)
 
+    client = bigquery.Client
     @app.route('/')
     def root():
-        users = []
-        tweets = []
-        return render_template('base.html', title='Home', users=users, tweets=tweets )
+        return render_template('base.html', title='Home')
 
-    @app.route('/user', methods=['POST'])
-    @app.route('/user/<name>', methods=['GET'])
+    #@app.route('/user', methods=['POST'])
+    @app.route('/user/<name>')
     def user(name=None):
         message = ''
-        name = name or request.values['user_name']
-        try:
-            if request.method == 'POST':
-                add_or_update_user(name)
-                message = 'User {} successfully added!'.format(name)
-            tweets = User.query.filter(User.name == name).one().tweets
-        except Exception as e:
-            message = 'Error adding {}: {}'.format(name, e)
-            tweets = []
-        return render_template('user.html', title=name, tweets=tweets,
-                               message=message)
+        json_out = textblob_sentiment(name)
+        return json_out
+        # return render_template('user.html', title=name, message=message)
 
     return app
 
