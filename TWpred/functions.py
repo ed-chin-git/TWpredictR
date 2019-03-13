@@ -86,11 +86,11 @@ def get_sentiment(text):
 
 def textblob_sentiment(author):
     # LOCAL authenticate with google
-    # jsonPath = "google-cred.json"
-    # client = bigquery.Client.from_service_account_json(jsonPath)
+    jsonPath = "env.py"
+    client = bigquery.Client.from_service_account_json(jsonPath)
     
     # HEROKU  authenticate with google ->  uses config vars in dashboard
-    client = bigquery.Client()
+    #client = bigquery.Client()
     
     # Construct SQL query
     # Using WHERE reduces the amount of data scanned / quota used
