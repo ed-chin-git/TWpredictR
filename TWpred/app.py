@@ -2,7 +2,7 @@
 from flask import Flask, request, render_template
 from .models import DB, User, Tweet
 from decouple import config
-#from .functions import adduser, add_or_update_user
+from .functions import adduser, add_or_update_user
 from .predicted import predict_user
 import re
 import sys
