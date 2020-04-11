@@ -1,4 +1,4 @@
-""" Main application and routing logic for TweetR """
+""" Main application and routing logic for  """
 from flask import Flask, request, render_template
 from .functions import textblob_sentiment
 
